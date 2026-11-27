@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f6fa">
+<title>Survey Report · Mobile Preview</title>
+<style>
+:root{--navy:#172b4d;--blue:#3767d5;--teal:#18a999;--canvas:#f4f6fa;--surface:#fff;--text:#202939;--muted:#667085;--line:#e4e8ef;--amber:#d98b24;--red:#c53b45;--radius:20px}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;color:var(--text)}
+button,input{font:inherit}button{cursor:pointer}.app{max-width:520px;min-height:100svh;margin:auto;background:var(--canvas);padding-bottom:calc(86px + env(safe-area-inset-bottom));position:relative}
+.top{padding:22px 22px 12px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--blue)}.top small{color:var(--muted)}
+main{padding:8px 18px 24px}.screen{display:none;animation:fade .18s ease}.screen.active{display:block}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;color:var(--teal);text-transform:uppercase}
+h1{font-size:27px;line-height:1.2;letter-spacing:-.04em;margin:8px 0 9px;color:var(--navy)}h2{font-size:18px;margin:0 0 12px;color:var(--navy)}h3{font-size:14px;margin:0;color:var(--navy)}
+p{font-size:13px;line-height:1.65;color:var(--muted);margin:6px 0}.hero{padding:18px 4px 20px}.hero p{max-width:330px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:17px;margin:12px 0;box-shadow:0 8px 24px rgba(23,43,77,.045)}
+.card.soft{background:#edf3ff;border-color:#e1eaff}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.muted{color:var(--muted)}.tiny{font-size:11px}.metric{font-size:27px;font-weight:800;color:var(--navy);letter-spacing:-.04em}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric-card{padding:15px;border-radius:16px;background:#fff;border:1px solid var(--line)}.metric-card span{font-size:11px;color:var(--muted)}.metric-card strong{display:block;font-size:24px;color:var(--navy);margin-top:6px}
+.btn{border:0;border-radius:14px;padding:15px 17px;min-height:50px;font-weight:750;font-size:14px;width:100%;background:var(--blue);color:#fff;box-shadow:0 7px 16px rgba(55,103,213,.18)}.btn.secondary{background:#fff;color:var(--navy);border:1px solid var(--line);box-shadow:none}.btn.ghost{background:transparent;color:var(--blue);box-shadow:none;padding:9px;min-height:40px}.btn:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:grid;gap:9px;margin-top:16px}.field{margin:14px 0}.field label{display:block;font-size:12px;font-weight:750;margin-bottom:7px;color:var(--navy)}input[type=text],input[type=file]{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--text);font-size:13px}
+.drop{border:1.5px dashed #aabbe1;border-radius:17px;background:#f9fbff;padding:22px 14px;text-align:center}.drop strong{display:block;color:var(--navy);margin:8px 0 4px}.drop input{max-width:100%;font-size:12px}
+.notice{padding:13px 14px;border-radius:14px;background:#fff6e8;border:1px solid #f3dfbd;color:#82520e;font-size:12px;line-height:1.55;margin:12px 0}.success{background:#eaf8f5;border-color:#ccece5;color:#176b60}.danger{background:#fff0f0;border-color:#f3d0d0;color:#9f3038}
+.pill{font-size:10px;font-weight:800;border-radius:99px;padding:5px 9px;background:#edf3ff;color:var(--blue)}.pill.green{background:#eaf8f5;color:#167a6c}.pill.amber{background:#fff3df;color:#956015}.pill.gray{background:#f0f2f5;color:#5e6673}
+.list{display:grid;gap:9px}.col-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff}.col-meta{display:flex;gap:12px;margin-top:9px;font-size:11px;color:var(--muted)}
+.bar-row{display:grid;grid-template-columns:74px 1fr 28px;align-items:center;gap:8px;margin:10px 0;font-size:11px}.bar-track{height:9px;background:#edf0f5;border-radius:20px;overflow:hidden}.bar-fill{height:100%;background:var(--blue);border-radius:20px}
+.bottom{position:fixed;z-index:10;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,520px);padding:9px 8px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr)}
+.tab{border:0;background:transparent;color:#8b95a5;display:grid;justify-items:center;gap:4px;font-size:10px;font-weight:700;padding:5px 0}.tab .ico{font-size:18px;line-height:20px}.tab.active{color:var(--blue)}
+hr{border:0;border-top:1px solid var(--line);margin:15px 0}.report-title{font-size:20px;font-weight:800;color:var(--navy)}.empty{text-align:center;padding:28px 10px}.empty .symbol{font-size:30px}.footnote{font-size:10px;color:#8a93a1;line-height:1.5;margin-top:12px}
+.switchline{display:flex;justify-content:space-between;align-items:center;gap:12px}.switchline input{width:20px;height:20px;accent-color:var(--blue)}
+@media(min-width:700px){body{padding:24px 0}.app{border-radius:28px;overflow:hidden;min-height:850px;box-shadow:0 22px 80px rgba(23,43,77,.12)}.bottom{bottom:24px;border-radius:0 0 28px 28px}}
+</style></head>
+<body><div class="app">
+<header class="top"><div class="brand">SURVEY / REPORT</div><small>LOCAL PREVIEW · v1.0</small></header>
+<main>
+<section class="screen active" id="home">
+ <div class="hero"><div class="eyebrow">Insight, made simple</div><h1>설문 결과를<br>한눈에 정리하세요.</h1><p>CSV 파일을 검사하고 핵심 통계와 보고서를 확인하는 모바일 컨셉입니다.</p></div>
+ <div class="grid2"><div class="metric-card"><span>최근 샘플 응답</span><strong id="homeCount">6건</strong></div><div class="metric-card"><span>개인정보 기본 정책</span><strong style="font-size:17px">기본 제외</strong></div></div>
+ <div class="card soft"><div class="row"><div><div class="eyebrow">Quick start</div><h2 style="margin:5px 0">새 보고서 만들기</h2><p>CSV를 선택하고 열 구성을 먼저 확인합니다.</p></div><div style="font-size:30px">↗</div></div><div class="actions"><button class="btn" onclick="go('import')">CSV 가져오기</button><button class="btn secondary" onclick="loadSample()">샘플 데이터로 체험</button></div></div>
+ <div class="card"><div class="row"><h3>작업 순서</h3><span class="pill">3 STEPS</span></div><p>01 파일 선택 → 02 데이터 검사 → 03 보고서 확인</p></div>
+ <p class="footnote">현재 GitHub 제품은 Python 로컬 CLI입니다. 이 HTML은 화면 검토용 독립 프로토타입이며 Python 엔진/API와 직접 연결되지 않습니다.</p>
+</section>
+
+<section class="screen" id="import">
+ <div class="hero"><div class="eyebrow">Step 01 · Upload</div><h1>CSV 파일 가져오기</h1><p>분석할 설문 응답 파일을 선택하세요. UTF-8 CSV 형식을 지원하는 흐름으로 설계했습니다.</p></div>
+ <div class="card">
+  <div class="drop"><div style="font-size:28px">⇧</div><strong>분석할 파일을 선택하세요</strong><p>CSV · 첫 번째 행은 열 이름이어야 합니다.</p><input id="csvFile" type="file" accept=".csv,text/csv" onchange="onFile(this.files[0])"></div>
+  <div id="fileInfo" class="notice" style="display:none"></div>
+  <div class="field"><label for="reportTitle">보고서 제목</label><input id="reportTitle" type="text" value="설문 결과 보고서" maxlength="80"></div>
+  <div class="notice">개인정보로 보이는 열은 기본적으로 보고서에서 제외합니다. 탐지 기능은 보조 수단이며 모든 개인정보를 찾아내지는 못합니다.</div>
+  <div class="actions"><button class="btn" id="inspectBtn" disabled onclick="inspectFile()">데이터 검사하기</button><button class="btn secondary" onclick="loadSample()">샘플 CSV 사용</button></div>
+ </div>
+ <p class="footnote">프로토타입은 선택한 파일을 브라우저 안에서 처리합니다. 기존 CLI는 로컬 Python 명령으로 실행됩니다.</p>
+</section>
+
+<section class="screen" id="inspect">
+ <div class="hero"><div class="eyebrow">Step 02 · Inspect</div><h1>데이터 검사 결과</h1><p>열 유형과 응답 상태를 확인하고 보고서 생성 옵션을 선택합니다.</p></div>
+ <div class="grid2"><div class="metric-card"><span>전체 응답</span><strong id="rowCount">0</strong></div><div class="metric-card"><span>전체 열</span><strong id="columnCount">0</strong></div></div>
+ <div id="piiNotice" class="notice" style="display:none"></div>
+ <div class="card"><div class="row"><h2>열 구성</h2><span class="pill" id="columnBadge">0 COLUMNS</span></div><div class="list" id="columnList"></div></div>
+ <div class="card">
+  <h2>생성 옵션</h2>
+  <div class="field"><label for="titleInspect">보고서 제목</label><input id="titleInspect" type="text" value="설문 결과 보고서" maxlength="80"></div>
+  <div class="switchline"><div><b style="font-size:13px">개인정보 의심 열 보존</b><p class="tiny">기본값은 제외입니다.</p></div><input id="keepPii" type="checkbox" onchange="togglePiiWarning()"></div>
+  <div id="keepWarning" class="notice danger" style="display:none">개인정보 의심 열이 보고서에 포함됩니다. 실제 공유 전 반드시 내용을 확인하세요.</div>
+  <button class="btn" style="margin-top:14px" onclick="buildReport()">보고서 생성하기</button>
+ </div>
+</section>
+
+<section class="screen" id="report">
+ <div class="hero"><div class="eyebrow">Step 03 · Report</div><h1>분석 보고서</h1><p>열별 집계 결과를 확인하고 HTML 또는 PDF 형태로 내보냅니다.</p></div>
+ <div id="reportBody"><div class="card empty"><div class="symbol">▤</div><h2>아직 생성된 보고서가 없습니다.</h2><p>CSV를 가져와 데이터 검사를 진행하세요.</p><button class="btn" onclick="go('import')">CSV 가져오기</button></div></div>
+</section>
+
+<section class="screen" id="settings">
+ <div class="hero"><div class="eyebrow">Preferences</div><h1>설정 및 안내</h1><p>현재 분석 도구의 처리 기준과 한계를 확인할 수 있습니다.</p></div>
+ <div class="card"><h2>개인정보 처리</h2><div class="notice">이름·이메일·전화번호 등으로 의심되는 열은 기본 보고서에서 제외합니다.</div><p>열 이름 힌트와 이메일/휴대전화 형태를 기준으로 탐지합니다. 완전한 개인정보 식별이나 법적 비식별 처리를 보장하지 않습니다.</p></div>
+ <div class="card"><h2>분석 방식</h2><p>유료 AI API 또는 네트워크 호출 없이 CSV를 로컬에서 처리하는 것이 현재 CLI의 기본 방향입니다.</p><hr><p><b>숫자형</b> 평균·중앙값·최소·최대·분포</p><p><b>선택형</b> 항목별 응답 빈도</p><p><b>주관식</b> 단순 단어 빈도 상위 5개</p></div>
+ <div class="card"><h2>CLI 실행 안내</h2><p><code>pip install -r requirements.txt</code></p><p><code>python -m survey_report check --csv sample/survey.csv</code></p><p><code>python -m survey_report build --csv sample/survey.csv --out output</code></p></div>
+ <div class="card"><h2>프로젝트 정보</h2><p>PRJ-0015 · Survey Auto Report · v1.0</p><p><a href="https://github.com/jeong-jihyun/survey-auto-report-saas" target="_blank" rel="noopener">GitHub 저장소 열기 ↗</a></p></div>
+</section>
+</main>
+<nav class="bottom" aria-label="하단 메뉴">
+ <button class="tab active" data-tab="home" onclick="go('home')"><span class="ico">⌂</span>홈</button>
+ <button class="tab" data-tab="import" onclick="go('import')"><span class="ico">＋</span>가져오기</button>
+ <button class="tab" data-tab="inspect" onclick="go('inspect')"><span class="ico">⌕</span>검사</button>
+ <button class="tab" data-tab="report" onclick="go('report')"><span class="ico">▤</span>보고서</button>
+ <button class="tab" data-tab="settings" onclick="go('settings')"><span class="ico">⚙</span>설정</button>
+</nav></div>
+<script>
+let sourceText="", fileName="sample/survey.csv", analysis=null, generatedHtml="";
+const sample=`이름,이메일,성별,만족도,추천의향,불편한 점
+김가나,kim@example.com,여,5,9,배송이 빨라서 좋았어요
+이다라,lee@example.com,남,4,8,가격이 조금 비싸요
+박마바,park@example.com,여,3,6,배송이 느리고 포장이 아쉬워요
+최사아,choi@example.com,남,5,10,
+정자차,jung@example.com,여,2,3,가격이 비싸고 고객 응대가 느려요
+한카타,han@example.com,남,4,7,포장이 좋아요`;
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===id));window.scrollTo({top:0,behavior:'smooth'});}
+function parseCSV(text){
+ let rows=[],row=[],field="",quoted=false;
+ for(let i=0;i<text.length;i++){let c=text[i],n=text[i+1];if(c==='"'&&quoted&&n==='"'){field+='"';i++}else if(c==='"'){quoted=!quoted}else if(c===','&&!quoted){row.push(field);field=""}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&n==='\n')i++;row.push(field);if(row.some(v=>v.trim()))rows.push(row);row=[];field=""}else field+=c;}
+ row.push(field);if(row.some(v=>v.trim()))rows.push(row);
+ if(rows.length<2)throw Error("응답이 한 줄도 없습니다.");let headers=rows.shift().map(x=>x.replace(/^\uFEFF/,"").trim());
+ if(!headers.length||headers.some(x=>!x)||new Set(headers).size!==headers.length)throw Error("열 이름이 비었거나 중복입니다.");
+ return {headers,rows:rows.map(r=>headers.map((_,i)=>r[i]??""))};
+}
+const piiHints=["이름","성명","이메일","email","메일","전화","연락처","휴대폰","주소","name","phone"];
+function analyzeCSV(parsed,keep){
+ const {headers,rows}=parsed,pii=headers.filter((h,i)=>piiHints.some(k=>h.toLowerCase().includes(k))||rows.some(r=>/[\w.+-]+@[\w-]+\.[\w.-]+|01[016789][- ]?\d{3,4}[- ]?\d{4}/.test(r[i]||"")));
+ const cols=headers.map((name,i)=>{const vals=rows.map(r=>(r[i]||"").trim()),v=vals.filter(Boolean),nums=v.map(Number),numeric=v.length>0&&nums.every(Number.isFinite),uniq=[...new Set(v)];let type=!v.length?"empty":numeric?"number":uniq.length<=8&&uniq.length<v.length?"choice":"text";
+ const base={name,type,answered:v.length,missing:vals.length-v.length};
+ if(type==="number"){const s=[...nums].sort((a,b)=>a-b),sum=nums.reduce((a,b)=>a+b,0),mid=s.length%2?s[(s.length-1)/2]:(s[s.length/2-1]+s[s.length/2])/2;Object.assign(base,{mean:Math.round(sum/s.length*100)/100,median:mid,min:s[0],max:s[s.length-1],dist:freq(nums.map(x=>String(x)))})}
+ if(type==="choice")base.dist=freq(v);
+ if(type==="text"){let words={};v.forEach(x=>x.match(/[가-힣A-Za-z0-9]+/g)?.forEach(w=>{w=w.length>2?w.replace(/(이|가|은|는|을|를|도|에|요)$/,""):w;if(w.length>=2&&!["그리고","너무","정말","조금","아주","있어요","좋았어요","해요","입니다"].includes(w))words[w]=(words[w]||0)+1}));base.keywords=Object.entries(words).sort((a,b)=>b[1]-a[1]).slice(0,5)}
+ return base;}).filter(c=>keep||!pii.includes(c.name));
+ return {n:rows.length,headers,pii,dropped:keep?[]:pii,columns:cols};
+}
+function freq(vals){let o={};vals.forEach(v=>o[v]=(o[v]||0)+1);return Object.entries(o).sort((a,b)=>b[1]-a[1])}
+function onFile(file){if(!file)return;const info=document.getElementById('fileInfo');info.style.display='block';if(!file.name.toLowerCase().endsWith('.csv')){info.className='notice danger';info.textContent='CSV 파일만 선택할 수 있습니다.';return}
+ const reader=new FileReader();reader.onload=()=>{sourceText=reader.result;fileName=file.name;info.className='notice success';info.textContent=`선택됨 · ${file.name} · ${(file.size/1024).toFixed(1)} KB`;document.getElementById('inspectBtn').disabled=false};reader.onerror=()=>{info.className='notice danger';info.textContent='파일을 읽지 못했습니다.'};reader.readAsText(file,'UTF-8');}
+function loadSample(){sourceText=sample;fileName="sample/survey.csv";document.getElementById('fileInfo').style.display='block';document.getElementById('fileInfo').className='notice success';document.getElementById('fileInfo').textContent='샘플 CSV가 준비되었습니다 · 6개 응답';document.getElementById('inspectBtn').disabled=false;go('import');inspectFile();}
+function inspectFile(){try{if(!sourceText)throw Error("CSV 파일을 먼저 선택하세요.");let parsed=parseCSV(sourceText);analysis=analyzeCSV(parsed,false);document.getElementById('rowCount').textContent=analysis.n;document.getElementById('columnCount').textContent=analysis.headers.length;document.getElementById('columnBadge').textContent=analysis.columns.length+" COLUMNS";document.getElementById('titleInspect').value=document.getElementById('reportTitle').value||"설문 결과 보고서";
+ let pii=document.getElementById('piiNotice');pii.style.display=analysis.pii.length?'block':'none';pii.textContent=analysis.pii.length?'개인정보 의심 열: '+analysis.pii.join(', ')+' · 기본 보고서에서 제외됩니다.':"개인정보 의심 열이 탐지되지 않았습니다.";
+ document.getElementById('columnList').innerHTML=analysis.columns.map(c=>`<div class="col-card"><div class="row"><h3>${esc(c.name)}</h3><span class="pill ${c.type==='number'?'green':c.type==='text'?'amber':'gray'}">${c.type.toUpperCase()}</span></div><div class="col-meta"><span>응답 ${c.answered}</span><span>빈칸 ${c.missing}</span></div></div>`).join('');go('inspect');
+ }catch(e){alert(e.message)}}
+function togglePiiWarning(){document.getElementById('keepWarning').style.display=document.getElementById('keepPii').checked?'block':'none'}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function reportMarkup(res,title){let out=`<!doctype html><html lang="ko"><meta charset="utf-8"><title>${esc(title)}</title><style>body{font-family:Arial,sans-serif;max-width:760px;margin:32px auto;padding:0 18px;color:#202939;line-height:1.6}h1,h2{color:#172b4d}section{padding:16px 0;border-bottom:1px solid #e4e8ef}.bar{height:9px;background:#edf0f5;border-radius:8px;overflow:hidden}.fill{height:100%;background:#3767d5}</style><h1>${esc(title)}</h1><p>응답 ${res.n}건 · 원본 ${esc(fileName)}</p>`;
+ if(res.dropped.length)out+=`<p><b>개인정보 의심 열 제외:</b> ${esc(res.dropped.join(', '))}</p>`;else if(res.pii.length)out+=`<p><b>주의: 개인정보 의심 열 포함:</b> ${esc(res.pii.join(', '))}</p>`;
+ res.columns.forEach(c=>{out+=`<section><h2>${esc(c.name)}</h2><p>응답 ${c.answered} / 빈칸 ${c.missing}</p>`;
+ let pairs=c.type==='text'?c.keywords:c.dist||[];
+ if(c.type==='number')out+=`<p>평균 ${c.mean} · 중앙값 ${c.median} · 최소 ${c.min} · 최대 ${c.max}</p>`;
+ if(c.type==='text')out+=`<p>자주 나온 말: ${pairs.map(x=>esc(x[0])+'('+x[1]+')').join(', ')||'없음'}</p>`;
+ if(pairs.length){let max=Math.max(...pairs.map(x=>x[1]),1);out+=pairs.map(x=>`<p>${esc(x[0])} · ${x[1]}</p><div class="bar"><div class="fill" style="width:${x[1]/max*100}%"></div></div>`).join('')}
+ out+='</section>'});out+='<p><small>이 결과는 단순 집계입니다. 주관식 키워드는 의미 요약이 아니며 해석은 사람이 확인해야 합니다.</small></p></html>';return out;}
+function buildReport(){try{let keep=document.getElementById('keepPii').checked;let parsed=parseCSV(sourceText);let res=analyzeCSV(parsed,keep);let title=document.getElementById('titleInspect').value.trim();if(!title)throw Error("보고서 제목을 입력하세요.");analysis=res;generatedHtml=reportMarkup(res,title);
+ let body=`<div class="card"><div class="eyebrow">Generated preview</div><div class="report-title">${esc(title)}</div><p>${esc(fileName)} · ${res.n}개 응답</p><div class="grid2" style="margin-top:14px"><div class="metric-card"><span>분석 열</span><strong>${res.columns.length}</strong></div><div class="metric-card"><span>개인정보 의심</span><strong>${res.pii.length}</strong></div></div></div>`;
+ if(res.dropped.length)body+=`<div class="notice">개인정보 의심 열 제외: ${esc(res.dropped.join(', '))}</div>`;else if(res.pii.length)body+=`<div class="notice danger">개인정보 의심 열 포함: ${esc(res.pii.join(', '))}</div>`;
+ body+=res.columns.map(c=>{let pairs=c.type==='text'?c.keywords:c.dist||[];let max=Math.max(1,...pairs.map(x=>x[1]));let stats=c.type==='number'?`<p>평균 <b>${c.mean}</b> · 중앙값 <b>${c.median}</b></p><p>최소 ${c.min} · 최대 ${c.max}</p>`:c.type==='text'?`<p>자주 나온 말은 단순 빈도 기준입니다.</p>`:'';return `<div class="card"><div class="row"><h2>${esc(c.name)}</h2><span class="pill">${c.type}</span></div><p>응답 ${c.answered} · 빈칸 ${c.missing}</p>${stats}${pairs.map(x=>`<div class="bar-row"><span>${esc(x[0])}</span><div class="bar-track"><div class="bar-fill" style="width:${x[1]/max*100}%"></div></div><b>${x[1]}</b></div>`).join('')}</div>`}).join('');
+ body+=`<div class="card"><h2>내보내기</h2><div class="actions"><button class="btn" onclick="downloadHTML()">HTML 보고서 다운로드</button><button class="btn secondary" onclick="window.print()">PDF로 저장 / 인쇄</button></div><p class="footnote">PDF는 브라우저 인쇄 대화상자에서 'PDF로 저장'을 선택합니다. CLI PDF 출력과 동일한 렌더러는 아닙니다.</p></div>`;
+ document.getElementById('reportBody').innerHTML=body;go('report');
+ }catch(e){alert(e.message)}}
+function downloadHTML(){let blob=new Blob([generatedHtml],{type:'text/html;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='survey-report.html';a.click();URL.revokeObjectURL(a.href)}
+</script></body></html>
